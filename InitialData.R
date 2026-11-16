@@ -24,6 +24,5 @@ sum(duplicated(newhappiness.data[["Country name"]]))
 #Remove countries with missing values
 newhappiness.clean <- na.omit(newhappiness.data)
 
-dim(newhappiness.clean)
 colSums(is.na(newhappiness.clean))
 sum(duplicated(newhappiness.clean[["Country name"]]))
