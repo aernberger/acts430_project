@@ -1,24 +1,29 @@
-#Import the dataset
-happiness.dataset <- read.csv("~/Desktop/ACTS430/Project/world_happiness_Update_report_2026.csv")
+#Import dataset
+newhappiness.dataset <- read.csv("~/Desktop/ACTS430/Project/dataset.csv",
+                                 check.names = FALSE)
 
-#Remove rank variable
-happiness.data <- subset(happiness.dataset, select = -rank)
+#Select recent report observations and relevant fields
+newhappiness.data <- subset(newhappiness.dataset, Year == 2025,
+                            select = c(
+                              "Country name",
+                              "Life evaluation (3-year average)",
+                              "Explained by: Log GDP per capita",
+                              "Explained by: Social support",
+                              "Explained by: Healthy life expectancy",
+                              "Explained by: Freedom to make life choices",
+                              "Explained by: Generosity",
+                              "Explained by: Perceptions of corruption"
+                            ))
 
-#Check data
-head(happiness.data)
-summary(happiness.data)
+head(newhappiness.data)
+summary(newhappiness.data)
 
-colSums(is.na(happiness.data))
+colSums(is.na(newhappiness.data))
+sum(duplicated(newhappiness.data[["Country name"]]))
 
-sum(duplicated(happiness.data$country))
+#Remove countries with missing values
+newhappiness.clean <- na.omit(newhappiness.data)
 
-#Data cleaning - keep first duplicated
-happiness.unique <- happiness.data[!duplicated(happiness.data$country), ]
-
-sum(duplicated(happiness.unique$country))
-
-head(happiness.unique)
-summary(happiness.unique)
-
-
-
+dim(newhappiness.clean)
+colSums(is.na(newhappiness.clean))
+sum(duplicated(newhappiness.clean[["Country name"]]))
