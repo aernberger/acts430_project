@@ -1,5 +1,5 @@
 #Import dataset
-newhappiness.dataset <- read.csv("~/Desktop/ACTS430/Project/dataset.csv",
+newhappiness.dataset <- read.csv("dataset.csv",
                                  check.names = FALSE)
 
 #Select recent report observations and relevant fields
